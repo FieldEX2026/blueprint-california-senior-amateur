@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Blueprint to the California Senior Amateur</title>
+<style>
+:root{
+  --bg:#07111f;--panel:#0d1a2a;--panel2:#13243a;
+  --text:#f7f9fc;--muted:#9aa9ba;--blue:#3aa4ff;
+  --gold:#d7aa3e;--line:#26384d
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#050b13,#0a1725);
+  color:var(--text)
+}
+.app{max-width:1100px;margin:auto;padding:18px}
+.topbar{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px
+}
+.topbar h1{margin:4px 0 0;font-size:26px}
+.kicker{color:var(--blue);font-weight:900;letter-spacing:1px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+button{
+  border:0;border-radius:10px;padding:11px 14px;
+  font-weight:800;cursor:pointer
+}
+.tab,.secondary{
+  background:#102239;color:#dfe9f5;border:1px solid var(--line)
+}
+.tab.active{background:#174e82}
+.primary{background:var(--gold);color:#121212}
+.view{display:none}
+.view.active{display:block}
+.hero{
+  min-height:360px;border:1px solid var(--line);
+  border-radius:18px;padding:34px;display:flex;align-items:center;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(215,170,62,.35),transparent 30%),
+    linear-gradient(135deg,#10253c,#07111f)
+}
+.hero h2{font-size:42px;line-height:1.05;margin:10px 0}
+.grid{display:grid;gap:16px;margin-top:16px}
+.two{grid-template-columns:1fr 1fr}
+.three{grid-template-columns:repeat(3,1fr)}
+.card{
+  background:linear-gradient(145deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);border-radius:16px;padding:18px
+}
+.card h3{margin-top:0}
+.muted{color:var(--muted)}
+.check{display:flex;gap:10px;align-items:center;padding:9px 0}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--blue)}
+.progress{
+  height:12px;background:#233247;border-radius:10px;
+  overflow:hidden;margin-top:12px
+}
+.progress div{height:100%;width:0;background:var(--blue)}
+.metric{text-align:center}
+.metric strong{display:block;font-size:36px}
+.focus-box{
+  height:220px;border-radius:12px;
+  background:linear-gradient(135deg,#173856,#0e1d2c);
+  display:grid;place-items:center
+}
+.focus-figure,.swing-placeholder{
+  font-size:30px;font-weight:900;text-align:center;letter-spacing:2px
+}
+.section-head{
+  display:flex;justify-content:space-between;align-items:center
+}
+.steps{display:grid;gap:12px}
+.step{
+  display:grid;grid-template-columns:42px 1fr auto;
+  gap:14px;align-items:center;padding:16px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px
+}
+.step span:first-child{
+  width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;background:#174e82;font-weight:900
+}
+.challenge{display:flex;gap:18px;align-items:center;margin-top:16px}
+.trophy{font-size:44px}
+.warning{
+  padding:12px;border-radius:10px;
+  background:#30270f;color:#f5d88a
+}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badges span{
+  padding:7px 10px;border-radius:999px;
+  background:#183a5a;color:#cfe9ff
+}
+.swing-placeholder{
+  min-height:420px;border-radius:12px;
+  background:linear-gradient(135deg,#173856,#0e1d2c);
+  display:grid;place-items:center
+}
+ol{line-height:1.8}
+label{display:block;font-weight:800;margin-bottom:14px}
+textarea{
+  display:block;width:100%;min-height:110px;
+  border-radius:10px;border:1px solid var(--line);
+  background:#07111d;color:white;padding:12px;margin-top:6px
+}
+#saveStatus{margin-left:10px;color:#6bd76b}
+@media(max-width:760px){
+  .two,.three{grid-template-columns:1fr}
+  .hero h2{font-size:32px}
+  .step{grid-template-columns:38px 1fr}
+  .step input{grid-column:2}
+  .section-head{align-items:flex-start;gap:12px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="topbar">
+  <div>
+    <div class="kicker">KELLY MATTSON</div>
+    <h1>Blueprint to the California Senior Amateur</h1>
+  </div>
+  <button id="resetBtn" class="secondary">Reset</button>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-view="home">Home</button>
+  <button class="tab" data-view="today">Today</button>
+  <button class="tab" data-view="plan">16 Weeks</button>
+  <button class="tab" data-view="conditioning">Conditioning</button>
+  <button class="tab" data-view="swing">Swing Lab</button>
+  <button class="tab" data-view="range">Saturday</button>
+  <button class="tab" data-view="journal">Journey</button>
+</nav>
+
+<main>
+
+<section id="home" class="view active">
+  <div class="hero">
+    <div>
+      <div class="kicker">TODAY'S MISSION</div>
+      <h2>Turn your chest.<br>Stay wide.<br>Finish balanced.</h2>
+      <p>Week 1 · Day 1</p>
+      <button class="primary" data-go="today">Start Today's Workout</button>
+    </div>
+  </div>
+
+  <div class="grid two">
+    <article class="card">
+      <h3>Today's Checklist</h3>
+      <div id="homeChecks"></div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <p id="progressText" class="muted">0% complete</p>
+    </article>
+
+    <article class="card">
+      <h3>Week 1 Focus</h3>
+      <div class="focus-box">
+        <div class="focus-figure">GOLF<br>SWING<br>LAB</div>
+      </div>
+      <p>Stand a touch taller, hinge from the hips and let your chest move the club.</p>
+    </article>
+  </div>
+
+  <div class="grid three">
+    <article class="metric card">
+      <span>Current Week</span><strong>1</strong><small>of 16</small>
+    </article>
+    <article class="metric card">
+      <span>Handicap</span><strong>3.5</strong><small>current</small>
+    </article>
+    <article class="metric card">
+      <span>Range Day</span><strong>Sat</strong><small>morning</small>
+    </article>
+  </div>
+</section>
+
+<section id="today" class="view">
+  <div class="section-head">
+    <div>
+      <div class="kicker">WEEK 1 · MONDAY</div>
+      <h2>Build Rotation</h2>
+    </div>
+    <button id="completeDayBtn" class="primary">Mark Day Complete</button>
+  </div>
+
+  <div class="steps">
+    <article class="step">
+      <span>1</span>
+      <div>
+        <h3>Mobility</h3>
+        <p>World's Greatest Stretch · Open Book · Hip Airplane · Wall Slides</p>
+      </div>
+      <input class="task" data-task="Mobility" type="checkbox">
+    </article>
+
+    <article class="step">
+      <span>2</span>
+      <div>
+        <h3>Conditioning Circuit</h3>
+        <p>1 mile · 3.2 mph · 4 min at 4% · 3 min at 9% · 13 lb today</p>
+      </div>
+      <input class="task" data-task="Conditioning" type="checkbox">
+    </article>
+
+    <article class="step">
+      <span>3</span>
+      <div>
+        <h3>Mirror Swing Lab</h3>
+        <p>Setup · Takeaway · P2 · Top of backswing</p>
+      </div>
+      <input class="task" data-task="Swing Lab" type="checkbox">
+    </article>
+
+    <article class="step">
+      <span>4</span>
+      <div>
+        <h3>Camera Session</h3>
+        <p>Five face-on and five down-the-line swings</p>
+      </div>
+      <input class="task" data-task="Camera Session" type="checkbox">
+    </article>
+
+    <article class="step">
+      <span>5</span>
+      <div>
+        <h3>Recovery + Journal</h3>
+        <p>Five-minute cooldown and one short entry</p>
+      </div>
+      <input class="task" data-task="Recovery" type="checkbox">
+    </article>
+  </div>
+
+  <article class="card challenge">
+    <div class="trophy">🏆</div>
+    <div>
+      <div class="kicker">DAILY CHALLENGE</div>
+      <h3>Hold the top-of-backswing position for 5 seconds on 20 consecutive swings without losing posture or balance.</h3>
+    </div>
+  </article>
+</section>
+
+<section id="plan" class="view">
+  <div class="kicker">ROADMAP</div>
+  <h2>16-Week Plan</h2>
+
+  <div class="grid two">
+    <article class="card">
+      <h3>Weeks 1–4 · Foundation</h3>
+      <p>Mobility, posture, setup and takeaway.</p>
+    </article>
+    <article class="card">
+      <h3>Weeks 5–8 · Build the Swing</h3>
+      <p>Top position, trail elbow and transition.</p>
+    </article>
+    <article class="card">
+      <h3>Weeks 9–12 · Performance</h3>
+      <p>Speed, strike, carry and dispersion.</p>
+    </article>
+    <article class="card">
+      <h3>Weeks 13–16 · Tournament Mode</h3>
+      <p>Scoring, routine, pressure and confidence.</p>
+    </article>
+  </div>
+</section>
+
+<section id="conditioning" class="view">
+  <div class="kicker">REFERENCE PAGE</div>
+  <h2>Kelly's Golf Conditioning Circuit</h2>
+
+  <div class="grid two">
+    <article class="card">
+      <h3>Treadmill</h3>
+      <p><b>1 mile · 3.2 mph</b></p>
+      <p>
+        4 minutes at 4% incline<br>
+        3 minutes at 9% incline<br>
+        Repeat until 1 mile.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Kettlebell Schedule</h3>
+      <p><b>Monday and Wednesday:</b> 13 lb</p>
+      <p><b>Friday:</b> 18 lb</p>
+      <p class="warning">No kettlebell swings while walking.</p>
+    </article>
+  </div>
+
+  <article class="card">
+    <h3>One Minute Each While Walking</h3>
+    <div class="badges">
+      <span>Halo</span>
+      <span>Farmers Walk</span>
+      <span>Biceps Curl</span>
+      <span>Double-Arm Curl to Press</span>
+      <span>Single-Arm Shoulder Press</span>
+      <span>Overhead Triceps Extension</span>
+    </div>
+  </article>
+</section>
+
+<section id="swing" class="view">
+  <div class="kicker">SWING LAB</div>
+  <h2>Week 1 Priorities</h2>
+
+  <div class="grid two">
+    <article class="card">
+      <div class="swing-placeholder">YOUR<br>SWING<br>PHOTO</div>
+    </article>
+
+    <article class="card">
+      <h3>What We Are Fixing</h3>
+      <ol>
+        <li>Stand a touch taller without becoming rigid.</li>
+        <li>Hinge from the hips instead of rounding through the upper back.</li>
+        <li>Let the chest move the club during takeaway.</li>
+        <li>Build more torso turn without forcing arm lift.</li>
+        <li>Let the trail elbow fold naturally.</li>
+      </ol>
+      <p><b>Cue:</b> Show the shirt logo forward, then hinge from the hips.</p>
+    </article>
+  </div>
+</section>
+
+<section id="range" class="view">
+  <div class="kicker">SATURDAY MORNING</div>
+  <h2>Performance Day</h2>
+
+  <div class="steps">
+    <article class="step">
+      <span>1</span>
+      <div><h3>Warm-up</h3><p>Mobility, wedges and tempo.</p></div>
+    </article>
+
+    <article class="step">
+      <span>2</span>
+      <div><h3>Technical Block</h3><p>Takeaway and top-of-backswing work with 9-iron and 7-iron.</p></div>
+    </article>
+
+    <article class="step">
+      <span>3</span>
+      <div><h3>Random Practice</h3><p>Change target and club every shot.</p></div>
+    </article>
+
+    <article class="step">
+      <span>4</span>
+      <div><h3>Driver Window</h3><p>Score 10 drives for start line, curve and strike.</p></div>
+    </article>
+  </div>
+</section>
+
+<section id="journal" class="view">
+  <div class="kicker">THE JOURNEY</div>
+  <h2>Week 1 Journal</h2>
+
+  <article class="card">
+    <label>
+      What felt better today?
+      <textarea id="j1"></textarea>
+    </label>
+
+    <label>
+      What still felt difficult?
+      <textarea id="j2"></textarea>
+    </label>
+
+    <label>
+      Message for my family or future self
+      <textarea id="j3"></textarea>
+    </label>
+
+    <button id="saveJournalBtn" class="primary">Save Entry</button>
+    <span id="saveStatus"></span>
+  </article>
+</section>
+
+</main>
+</div>
+
+<script>
+const tasks=[
+  'Mobility',
+  'Conditioning',
+  'Swing Lab',
+  'Camera Session',
+  'Recovery'
+];
+
+function state(){
+  return JSON.parse(localStorage.getItem('kmBlueprint')||'{}');
+}
+
+function saveState(s){
+  localStorage.setItem('kmBlueprint',JSON.stringify(s));
+}
+
+function openView(id){
+  document.querySelectorAll('.view').forEach(v=>{
+    v.classList.toggle('active',v.id===id);
+  });
+
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.classList.toggle('active',t.dataset.view===id);
+  });
+
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>openView(t.dataset.view);
+});
+
+document.querySelectorAll('[data-go]').forEach(b=>{
+  b.onclick=()=>openView(b.dataset.go);
+});
+
+const homeChecks=document.getElementById('homeChecks');
+
+tasks.forEach(name=>{
+  const label=document.createElement('label');
+  label.className='check';
+  label.innerHTML=
+    `<input type="checkbox" data-key="${name}">
+     <span>${name}</span>`;
+
+  homeChecks.appendChild(label);
+});
+
+function sync(){
+  const s=state();
+
+  document.querySelectorAll('input[type=checkbox][data-key]')
+    .forEach(c=>{
+      c.checked=!!s[c.dataset.key];
+
+      c.onchange=()=>{
+        const x=state();
+        x[c.dataset.key]=c.checked;
+        saveState(x);
+        sync();
+      };
+    });
+
+  document.querySelectorAll('.task').forEach(c=>{
+    c.checked=!!s[c.dataset.task];
+
+    c.onchange=()=>{
+      const x=state();
+      x[c.dataset.task]=c.checked;
+      saveState(x);
+      sync();
+    };
+  });
+
+  const done=tasks.filter(x=>s[x]).length;
+  const pct=Math.round(done/tasks.length*100);
+
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'% complete';
+
+  ['j1','j2','j3'].forEach(id=>{
+    const e=document.getElementById(id);
+
+    if(document.activeElement!==e){
+      e.value=s[id]||'';
+    }
+  });
+}
+
+sync();
+
+document.getElementById('completeDayBtn').onclick=()=>{
+  const s=state();
+
+  tasks.forEach(t=>{
+    s[t]=true;
+  });
+
+  saveState(s);
+  sync();
+  alert('Day 1 complete. One step closer.');
+};
+
+document.getElementById('saveJournalBtn').onclick=()=>{
+  const s=state();
+
+  ['j1','j2','j3'].forEach(id=>{
+    s[id]=document.getElementById(id).value;
+  });
+
+  saveState(s);
+
+  document.getElementById('saveStatus').textContent='Saved ✓';
+
+  setTimeout(()=>{
+    document.getElementById('saveStatus').textContent='';
+  },2000);
+};
+
+document.getElementById('resetBtn').onclick=()=>{
+  localStorage.removeItem('kmBlueprint');
+  location.reload();
+};
+</script>
+</body>
+</html>
