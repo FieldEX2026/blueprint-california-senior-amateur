@@ -31,7 +31,7 @@ body{
 .app{
   max-width:1050px;
   margin:auto;
-  padding:16px 16px 95px;
+  padding:16px 16px 100px;
 }
 
 header{
@@ -42,8 +42,8 @@ header{
 }
 
 .logo{
-  width:68px;
-  height:68px;
+  width:70px;
+  height:70px;
   border-radius:50%;
   border:4px solid var(--gold);
   background:#0b1a2b;
@@ -55,9 +55,8 @@ header{
 }
 
 .logo strong{
-  font-size:25px;
+  font-size:26px;
   color:white;
-  letter-spacing:-2px;
 }
 
 .logo:after{
@@ -90,7 +89,7 @@ h1{
 .view.active{display:block}
 
 .hero{
-  min-height:355px;
+  min-height:350px;
   padding:30px;
   border-radius:20px;
   border:1px solid var(--line);
@@ -127,13 +126,8 @@ h1{
   gap:15px;
 }
 
-.two{
-  grid-template-columns:1fr 1fr;
-}
-
-.three{
-  grid-template-columns:repeat(3,1fr);
-}
+.two{grid-template-columns:1fr 1fr}
+.three{grid-template-columns:repeat(3,1fr)}
 
 button{
   border:0;
@@ -181,13 +175,10 @@ input[type=checkbox]{
   background:var(--blue);
 }
 
-.metric{
-  text-align:center;
-}
-
+.metric{text-align:center}
 .metric strong{
   display:block;
-  font-size:36px;
+  font-size:34px;
 }
 
 .muted{color:var(--muted)}
@@ -236,8 +227,8 @@ input[type=checkbox]{
   margin-bottom:12px;
 }
 
-.event h3{
-  margin:0 0 6px;
+.event.backup{
+  border-left-color:var(--blue);
 }
 
 .event-top{
@@ -272,7 +263,6 @@ textarea{min-height:100px}
 table{
   width:100%;
   border-collapse:collapse;
-  margin-top:10px;
 }
 
 th,td{
@@ -291,9 +281,9 @@ th{color:var(--blue)}
   z-index:20;
   display:flex;
   justify-content:center;
-  background:rgba(5,12,20,.97);
+  background:rgba(5,12,20,.98);
   border-top:1px solid var(--line);
-  padding:7px max(7px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom));
+  padding:7px 6px calc(7px + env(safe-area-inset-bottom));
 }
 
 .bottom-nav button{
@@ -301,7 +291,7 @@ th{color:var(--blue)}
   max-width:150px;
   background:transparent;
   color:#aebdcb;
-  padding:9px 4px;
+  padding:9px 3px;
   font-size:12px;
 }
 
@@ -315,26 +305,20 @@ th{color:var(--blue)}
   margin-bottom:3px;
 }
 
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
 @media(max-width:720px){
   .two,.three,.form-grid{grid-template-columns:1fr}
   .hero h2{font-size:33px}
-  .hero{min-height:310px;padding:23px}
+  .hero{min-height:305px;padding:23px}
   .step{grid-template-columns:38px 1fr}
   .step input{grid-column:2}
   h1{font-size:19px}
-  .logo{width:59px;height:59px}
+  .logo{width:60px;height:60px}
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header>
@@ -349,6 +333,7 @@ th{color:var(--blue)}
 <main>
 
 <section id="home" class="view active">
+
   <div class="hero">
     <div>
       <div class="kicker">TODAY'S MISSION</div>
@@ -358,7 +343,17 @@ th{color:var(--blue)}
     </div>
   </div>
 
+  <div class="card">
+    <div class="kicker">PRIMARY TARGET EVENT</div>
+    <h2>California Senior Amateur Qualifier</h2>
+    <h3>Poppy Ridge Golf Course</h3>
+    <p><b>Monday, October 19, 2026</b> · Livermore</p>
+    <h2 id="countdown">Calculating...</h2>
+    <button class="primary" onclick="openView('tournaments')">View Tournament Plan</button>
+  </div>
+
   <div class="grid two">
+
     <div class="card">
       <h3>Today's Checklist</h3>
       <div id="homeChecks"></div>
@@ -373,6 +368,7 @@ th{color:var(--blue)}
       <p>Let the chest move the club.</p>
       <p>Build torso rotation without forcing arm lift.</p>
     </div>
+
   </div>
 
   <div class="grid three">
@@ -380,44 +376,56 @@ th{color:var(--blue)}
     <div class="card metric"><span>Handicap</span><strong>3.5</strong><small>current</small></div>
     <div class="card metric"><span>Range</span><strong>Sat</strong><small>morning</small></div>
   </div>
+
 </section>
 
 <section id="today" class="view">
-  <div class="section-head">
-    <div>
-      <div class="kicker">WEEK 1 · MONDAY</div>
-      <h2>Build Rotation</h2>
-    </div>
-    <button class="primary" id="completeDay">Complete Day</button>
-  </div>
+
+  <div class="kicker">WEEK 1 · MONDAY</div>
+  <h2>Build Rotation</h2>
 
   <div class="step">
     <div class="step-number">1</div>
-    <div><h3>Mobility</h3><p>World's Greatest Stretch, Open Book, Hip Airplane and Wall Slides.</p></div>
+    <div>
+      <h3>Mobility</h3>
+      <p>World's Greatest Stretch, Open Book, Hip Airplane and Wall Slides.</p>
+    </div>
     <input class="task" data-task="Mobility" type="checkbox">
   </div>
 
   <div class="step">
     <div class="step-number">2</div>
-    <div><h3>Conditioning</h3><p>1 mile · 3.2 mph · alternate 4% and 9% incline · 13 lb today.</p></div>
+    <div>
+      <h3>Conditioning</h3>
+      <p>1 mile · 3.2 mph · alternate 4% and 9% incline · 13 lb today.</p>
+    </div>
     <input class="task" data-task="Conditioning" type="checkbox">
   </div>
 
   <div class="step">
     <div class="step-number">3</div>
-    <div><h3>Swing Lab</h3><p>Setup, takeaway, P2 and top-of-backswing rehearsals.</p></div>
+    <div>
+      <h3>Swing Lab</h3>
+      <p>Setup, takeaway, P2 and top-of-backswing rehearsals.</p>
+    </div>
     <input class="task" data-task="Swing Lab" type="checkbox">
   </div>
 
   <div class="step">
     <div class="step-number">4</div>
-    <div><h3>Camera</h3><p>Five face-on and five down-the-line swings.</p></div>
+    <div>
+      <h3>Camera</h3>
+      <p>Five face-on and five down-the-line swings.</p>
+    </div>
     <input class="task" data-task="Camera" type="checkbox">
   </div>
 
   <div class="step">
     <div class="step-number">5</div>
-    <div><h3>Recovery and Journal</h3><p>Five-minute cooldown and quick journal entry.</p></div>
+    <div>
+      <h3>Recovery and Journal</h3>
+      <p>Five-minute cooldown and quick journal entry.</p>
+    </div>
     <input class="task" data-task="Recovery" type="checkbox">
   </div>
 
@@ -425,13 +433,16 @@ th{color:var(--blue)}
     <div class="kicker">DAILY CHALLENGE</div>
     <h3>Hold the top-of-backswing position for five seconds on 20 consecutive rehearsals.</h3>
   </div>
+
 </section>
 
 <section id="conditioning" class="view">
+
   <div class="kicker">REFERENCE PAGE</div>
   <h2>Golf Conditioning Circuit</h2>
 
   <div class="grid two">
+
     <div class="card">
       <h3>Treadmill</h3>
       <p><b>1 mile at 3.2 mph</b></p>
@@ -446,6 +457,7 @@ th{color:var(--blue)}
       <p><b>Friday:</b> 18 lb</p>
       <p class="muted">No kettlebell swings while walking.</p>
     </div>
+
   </div>
 
   <div class="card">
@@ -459,9 +471,11 @@ th{color:var(--blue)}
       <span>Overhead Triceps Extension</span>
     </div>
   </div>
+
 </section>
 
 <section id="swing" class="view">
+
   <div class="kicker">SWING LAB</div>
   <h2>Week 1 Priorities</h2>
 
@@ -477,71 +491,58 @@ th{color:var(--blue)}
 
   <div class="card">
     <h3>Takeaway</h3>
-    <p>Let the chest move the club. Keep the wrists quiet early.</p>
+    <p>Let the chest move the club and keep the wrists quiet early.</p>
   </div>
 
   <div class="card">
     <h3>Top of Backswing</h3>
     <p>Complete your turn while remaining balanced. Do not force extra arm lift.</p>
   </div>
+
 </section>
 
 <section id="tournaments" class="view">
-  <div class="section-head">
-    <div>
-      <div class="kicker">SCHEDULE · RESULTS · STATISTICS</div>
-      <h2>Tournaments</h2>
-    </div>
-    <button class="primary" onclick="toggleEventForm()">Add Event</button>
-  </div>
 
-  <div id="eventForm" class="card" style="display:none">
-    <h3>Add Tournament or Event</h3>
-
-    <div class="form-grid">
-      <label>Event name
-        <input id="eventName" placeholder="California Senior Amateur Qualifier">
-      </label>
-
-      <label>Date
-        <input id="eventDate" type="date">
-      </label>
-
-      <label>Course
-        <input id="eventCourse" placeholder="Golf course">
-      </label>
-
-      <label>Location
-        <input id="eventLocation" placeholder="City, California">
-      </label>
-
-      <label>Status
-        <select id="eventStatus">
-          <option>Planning</option>
-          <option>Registered</option>
-          <option>Waitlisted</option>
-          <option>Qualified</option>
-          <option>Completed</option>
-        </select>
-      </label>
-
-      <label>Type
-        <select id="eventType">
-          <option>Qualifier</option>
-          <option>Championship</option>
-          <option>City Amateur</option>
-          <option>Practice Round</option>
-          <option>Club Event</option>
-        </select>
-      </label>
-    </div>
-
-    <button class="primary" onclick="saveEvent()">Save Event</button>
-  </div>
+  <div class="kicker">SCHEDULE · RESULTS · STATISTICS</div>
+  <h2>Tournaments</h2>
 
   <div class="card">
-    <h3>Upcoming Schedule</h3>
-    <div id="eventList"></div>
+    <h3>2026 Qualifying Schedule</h3>
+
+    <div class="event">
+      <div class="event-top">
+        <div>
+          <h3>Poppy Ridge Golf Course</h3>
+          <div>Monday, October 19, 2026</div>
+        </div>
+        <div class="status">PRIMARY</div>
+      </div>
+      <p>California Senior Amateur Qualifier</p>
+      <p>Livermore, California</p>
+    </div>
+
+    <div class="event backup">
+      <div class="event-top">
+        <div>
+          <h3>Baylands Golf Links</h3>
+          <div>Thursday, October 15, 2026</div>
+        </div>
+        <div class="status">BACKUP</div>
+      </div>
+      <p>California Senior Amateur Qualifier</p>
+      <p>Palo Alto, California</p>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div>
+          <h3>California Senior Amateur Championship</h3>
+          <div>November 9–11, 2026</div>
+        </div>
+        <div class="status">GOAL</div>
+      </div>
+      <p>Championship Event</p>
+    </div>
   </div>
 
   <div class="card">
@@ -556,7 +557,7 @@ th{color:var(--blue)}
         <input id="resultDate" type="date">
       </label>
 
-      <label>Round score
+      <label>Score
         <input id="resultScore" type="number" placeholder="74">
       </label>
 
@@ -564,11 +565,11 @@ th{color:var(--blue)}
         <input id="resultPar" type="number" value="72">
       </label>
 
-      <label>Fairways hit
+      <label>Fairways Hit
         <input id="resultFairways" type="number" placeholder="9">
       </label>
 
-      <label>Greens in regulation
+      <label>Greens in Regulation
         <input id="resultGreens" type="number" placeholder="11">
       </label>
 
@@ -576,7 +577,7 @@ th{color:var(--blue)}
         <input id="resultPutts" type="number" placeholder="31">
       </label>
 
-      <label>Penalty strokes
+      <label>Penalty Strokes
         <input id="resultPenalties" type="number" value="0">
       </label>
     </div>
@@ -586,7 +587,9 @@ th{color:var(--blue)}
 
   <div class="card">
     <h3>Tournament Results</h3>
+
     <div style="overflow:auto">
+
       <table>
         <thead>
           <tr>
@@ -598,12 +601,15 @@ th{color:var(--blue)}
             <th>Putts</th>
           </tr>
         </thead>
+
         <tbody id="resultsTable"></tbody>
       </table>
+
     </div>
   </div>
 
   <div class="grid three">
+
     <div class="card metric">
       <span>Rounds</span>
       <strong id="roundCount">0</strong>
@@ -618,35 +624,43 @@ th{color:var(--blue)}
       <span>Average Putts</span>
       <strong id="puttingAverage">—</strong>
     </div>
+
   </div>
+
 </section>
 
 <section id="journal" class="view">
+
   <div class="kicker">THE JOURNEY</div>
   <h2>Daily Journal</h2>
 
   <div class="card">
-    <label>Today's win
+
+    <label>Today's Win
       <textarea id="journalWin"></textarea>
     </label>
 
-    <label>What needs work
+    <label>What Needs Work
       <textarea id="journalWork"></textarea>
     </label>
 
-    <label>Message for my family or future self
+    <label>Message for My Family or Future Self
       <textarea id="journalFamily"></textarea>
     </label>
 
     <button class="primary" onclick="saveJournal()">Save Entry</button>
     <span id="journalSaved" style="color:var(--green);margin-left:10px"></span>
+
   </div>
+
 </section>
 
 </main>
+
 </div>
 
 <nav class="bottom-nav">
+
   <button class="nav active" data-view="home">
     <span class="nav-icon">⌂</span>Home
   </button>
@@ -670,9 +684,11 @@ th{color:var(--blue)}
   <button class="nav" data-view="journal">
     <span class="nav-icon">✎</span>Journey
   </button>
+
 </nav>
 
 <script>
+
 const taskNames=[
   "Mobility",
   "Conditioning",
@@ -690,6 +706,7 @@ function saveData(data){
 }
 
 function openView(id){
+
   document.querySelectorAll(".view").forEach(view=>{
     view.classList.toggle("active",view.id===id);
   });
@@ -708,8 +725,11 @@ document.querySelectorAll(".nav").forEach(button=>{
 const homeChecks=document.getElementById("homeChecks");
 
 taskNames.forEach(name=>{
+
   const label=document.createElement("label");
+
   label.className="check";
+
   label.innerHTML=
     `<input type="checkbox" data-key="${name}">
      <span>${name}</span>`;
@@ -718,119 +738,72 @@ taskNames.forEach(name=>{
 });
 
 function syncTasks(){
+
   const data=getData();
 
   document.querySelectorAll("[data-key]").forEach(box=>{
+
     box.checked=!!data[box.dataset.key];
 
     box.onchange=()=>{
+
       const latest=getData();
+
       latest[box.dataset.key]=box.checked;
+
       saveData(latest);
+
       syncTasks();
     };
   });
 
   document.querySelectorAll(".task").forEach(box=>{
+
     box.checked=!!data[box.dataset.task];
 
     box.onchange=()=>{
+
       const latest=getData();
+
       latest[box.dataset.task]=box.checked;
+
       saveData(latest);
+
       syncTasks();
     };
   });
 
   const completed=taskNames.filter(name=>data[name]).length;
+
   const percent=Math.round(completed/taskNames.length*100);
 
   document.getElementById("progressBar").style.width=percent+"%";
+
   document.getElementById("progressText").textContent=percent+"% complete";
 }
 
-document.getElementById("completeDay").onclick=()=>{
-  const data=getData();
+function updateCountdown(){
 
-  taskNames.forEach(name=>{
-    data[name]=true;
-  });
+  const eventDate=new Date("2026-10-19T00:00:00");
 
-  saveData(data);
-  syncTasks();
-  alert("Day complete. One step closer.");
-};
+  const today=new Date();
 
-function toggleEventForm(){
-  const form=document.getElementById("eventForm");
-  form.style.display=form.style.display==="none"?"block":"none";
-}
+  today.setHours(0,0,0,0);
 
-function saveEvent(){
-  const data=getData();
-
-  if(!data.events){
-    data.events=[];
-  }
-
-  const name=document.getElementById("eventName").value.trim();
-
-  if(!name){
-    alert("Enter the event name.");
-    return;
-  }
-
-  data.events.push({
-    name,
-    date:document.getElementById("eventDate").value,
-    course:document.getElementById("eventCourse").value,
-    location:document.getElementById("eventLocation").value,
-    status:document.getElementById("eventStatus").value,
-    type:document.getElementById("eventType").value
-  });
-
-  saveData(data);
-
-  document.getElementById("eventName").value="";
-  document.getElementById("eventDate").value="";
-  document.getElementById("eventCourse").value="";
-  document.getElementById("eventLocation").value="";
-
-  toggleEventForm();
-  renderEvents();
-}
-
-function renderEvents(){
-  const data=getData();
-  const events=data.events||[];
-  const list=document.getElementById("eventList");
-
-  if(!events.length){
-    list.innerHTML='<p class="muted">No events added yet.</p>';
-    return;
-  }
-
-  const sorted=[...events].sort((a,b)=>
-    (a.date||"9999").localeCompare(b.date||"9999")
+  const days=Math.ceil(
+    (eventDate-today)/(1000*60*60*24)
   );
 
-  list.innerHTML=sorted.map(event=>`
-    <div class="event">
-      <div class="event-top">
-        <div>
-          <h3>${event.name}</h3>
-          <div>${event.date||"Date pending"}</div>
-        </div>
-        <div class="status">${event.status}</div>
-      </div>
-
-      <p>${event.type}</p>
-      <p>${event.course||""} ${event.location?"· "+event.location:""}</p>
-    </div>
-  `).join("");
+  document.getElementById("countdown").textContent=
+    days>0
+    ? days+" days remaining"
+    : days===0
+    ? "Qualifier Day"
+    : "Qualifier completed";
 }
 
 function saveResult(){
+
   const data=getData();
 
   if(!data.results){
@@ -838,8 +811,14 @@ function saveResult(){
   }
 
   const event=document.getElementById("resultEvent").value.trim();
-  const score=Number(document.getElementById("resultScore").value);
-  const par=Number(document.getElementById("resultPar").value);
+
+  const score=Number(
+    document.getElementById("resultScore").value
+  );
+
+  const par=Number(
+    document.getElementById("resultPar").value
+  );
 
   if(!event||!score){
     alert("Enter the event and score.");
@@ -871,13 +850,23 @@ function saveResult(){
 }
 
 function renderResults(){
+
   const data=getData();
+
   const results=data.results||[];
+
   const table=document.getElementById("resultsTable");
 
   table.innerHTML=results.map(result=>{
+
     const toPar=result.score-result.par;
-    const display=toPar===0?"E":toPar>0?"+"+toPar:toPar;
+
+    const display=
+      toPar===0
+      ? "E"
+      : toPar>0
+      ? "+"+toPar
+      : toPar;
 
     return `
       <tr>
@@ -891,51 +880,80 @@ function renderResults(){
     `;
   }).join("");
 
-  document.getElementById("roundCount").textContent=results.length;
+  document.getElementById("roundCount").textContent=
+    results.length;
 
   if(results.length){
+
     const scoring=
-      results.reduce((sum,result)=>sum+result.score,0)/results.length;
+      results.reduce(
+        (sum,result)=>sum+result.score,0
+      )/results.length;
 
     const putting=
-      results.reduce((sum,result)=>sum+result.putts,0)/results.length;
+      results.reduce(
+        (sum,result)=>sum+result.putts,0
+      )/results.length;
 
-    document.getElementById("scoringAverage").textContent=scoring.toFixed(1);
-    document.getElementById("puttingAverage").textContent=putting.toFixed(1);
+    document.getElementById("scoringAverage").textContent=
+      scoring.toFixed(1);
+
+    document.getElementById("puttingAverage").textContent=
+      putting.toFixed(1);
+
   }else{
+
     document.getElementById("scoringAverage").textContent="—";
+
     document.getElementById("puttingAverage").textContent="—";
   }
 }
 
 function saveJournal(){
+
   const data=getData();
 
-  data.journalWin=document.getElementById("journalWin").value;
-  data.journalWork=document.getElementById("journalWork").value;
-  data.journalFamily=document.getElementById("journalFamily").value;
+  data.journalWin=
+    document.getElementById("journalWin").value;
+
+  data.journalWork=
+    document.getElementById("journalWork").value;
+
+  data.journalFamily=
+    document.getElementById("journalFamily").value;
 
   saveData(data);
 
-  document.getElementById("journalSaved").textContent="Saved ✓";
+  document.getElementById("journalSaved").textContent=
+    "Saved ✓";
 
   setTimeout(()=>{
+
     document.getElementById("journalSaved").textContent="";
+
   },2000);
 }
 
 function loadJournal(){
+
   const data=getData();
 
-  document.getElementById("journalWin").value=data.journalWin||"";
-  document.getElementById("journalWork").value=data.journalWork||"";
-  document.getElementById("journalFamily").value=data.journalFamily||"";
+  document.getElementById("journalWin").value=
+    data.journalWin||"";
+
+  document.getElementById("journalWork").value=
+    data.journalWork||"";
+
+  document.getElementById("journalFamily").value=
+    data.journalFamily||"";
 }
 
 syncTasks();
-renderEvents();
+updateCountdown();
 renderResults();
 loadJournal();
+
 </script>
+
 </body>
 </html>
