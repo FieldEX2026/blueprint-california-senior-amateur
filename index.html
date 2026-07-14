@@ -1,227 +1,547 @@
 <!doctype html>
 <html lang="en">
-<head><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#061421">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Blueprint">
 <title>Blueprint Golf Performance System</title>
 
 <style>
 :root{
-  --bg:#000;
-  --card:#18181b;
-  --card2:#222226;
-  --line:#303036;
-  --text:#fff;
-  --muted:#a8a8ad;
-  --pink:#ff2d78;
-  --lime:#c8ff32;
-  --cyan:#45d9ff;
-  --orange:#ff9f0a;
-  --gold:#d6ad4d;
-  --green:#30d158;
+  --bg:#061421;
+  --panel:#0d2233;
+  --panel2:#102b40;
+  --line:#234258;
+  --text:#f5f8fb;
+  --muted:#98acbb;
+  --gold:#d9ad4a;
+  --blue:#45b8ff;
+  --green:#72c98a;
+  --red:#ff6b6b;
+  --purple:#a88cff;
+  --sand:#e8d9b5;
 }
+
 *{box-sizing:border-box}
-html,body{margin:0;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
-body{min-height:100vh}
-.app{max-width:920px;margin:auto;padding:14px 14px 105px}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(69,184,255,.15),transparent 25%),
+    linear-gradient(160deg,#04101a,#071b29 60%,#061421);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+}
+
+button,input,textarea,select{font:inherit}
+
+.app{
+  max-width:980px;
+  margin:auto;
+  padding:14px 14px 105px;
+}
 
 header{
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:8px 2px 18px;
+  gap:13px;
+  padding:8px 2px 17px;
 }
+
 .logo{
-  width:60px;height:60px;border-radius:18px;
-  display:grid;place-items:center;position:relative;
-  background:linear-gradient(145deg,#12324c,#071019);
-  border:2px solid var(--gold);
-  box-shadow:0 0 0 2px #2b2b30;
+  width:62px;
+  height:62px;
   flex:none;
+  border-radius:50%;
+  border:3px solid var(--gold);
+  background:
+    radial-gradient(circle at 28% 25%,#16456a,transparent 32%),
+    linear-gradient(145deg,#0c2940,#071521);
+  display:grid;
+  place-items:center;
+  position:relative;
+  box-shadow:0 0 0 3px rgba(217,173,74,.15);
 }
-.logo strong{font-size:23px}
+
+.logo strong{
+  font-family:Georgia,serif;
+  font-size:25px;
+  letter-spacing:-3px;
+}
+
 .logo:after{
-  content:"⚑";position:absolute;right:6px;top:5px;
-  color:var(--gold);font-size:15px
+  content:"⚑";
+  position:absolute;
+  right:5px;
+  top:3px;
+  color:var(--gold);
+  font-size:16px;
 }
+
 .brand small{
-  color:var(--gold);font-weight:900;letter-spacing:1.1px
+  color:var(--gold);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.4px;
 }
+
 .brand h1{
-  font-size:18px;line-height:1.1;margin:3px 0
+  font-size:18px;
+  line-height:1.08;
+  margin:3px 0;
 }
+
 .brand div{
-  color:var(--cyan);font-size:12px;font-weight:700
+  color:var(--blue);
+  font-size:12px;
+  font-weight:750;
 }
 
 .view{display:none}
 .view.active{display:block}
 
 .card{
-  background:linear-gradient(145deg,#19191c,#111113);
-  border:1px solid #29292e;
-  border-radius:24px;
-  padding:20px;
-  margin-bottom:15px;
+  background:
+    linear-gradient(145deg,rgba(17,43,64,.96),rgba(8,29,44,.96));
+  border:1px solid var(--line);
+  border-radius:23px;
+  padding:19px;
+  margin-bottom:14px;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
+
 .hero{
-  min-height:320px;
+  min-height:330px;
   display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
+  align-items:flex-end;
   overflow:hidden;
   position:relative;
   background:
-    radial-gradient(circle at 75% 18%,rgba(69,217,255,.28),transparent 26%),
-    radial-gradient(circle at 88% 62%,rgba(191,90,242,.24),transparent 32%),
-    linear-gradient(145deg,#131317,#060607);
+    linear-gradient(90deg,rgba(5,20,32,.98),rgba(5,20,32,.2)),
+    radial-gradient(circle at 85% 28%,rgba(217,173,74,.32),transparent 24%),
+    linear-gradient(145deg,#143c58,#071520);
 }
+
 .hero:after{
   content:"";
   position:absolute;
-  width:220px;height:220px;border-radius:50%;
-  border:18px solid var(--pink);
-  border-left-color:var(--lime);
-  border-bottom-color:var(--cyan);
-  right:-58px;top:20px;opacity:.9
+  width:250px;
+  height:250px;
+  right:-70px;
+  top:8px;
+  border-radius:50%;
+  border:2px solid rgba(217,173,74,.45);
+  box-shadow:
+    0 0 0 25px rgba(69,184,255,.09),
+    0 0 0 50px rgba(114,201,138,.06);
 }
-.hero-content{position:relative;z-index:2}
-.eyebrow{
-  color:var(--lime);
-  font-size:12px;font-weight:900;letter-spacing:1.1px
-}
-.hero h2{
-  font-size:42px;line-height:1.02;
-  letter-spacing:-1.5px;margin:10px 0
-}
-.primary,.secondary{
-  border:0;border-radius:14px;
-  padding:13px 17px;font-weight:800;font-size:15px
-}
-.primary{background:#fff;color:#000}
-.secondary{background:#2b2b30;color:#fff}
 
-.grid{display:grid;gap:14px}
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:620px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.2px;
+}
+
+.hero h2{
+  margin:9px 0;
+  font-size:42px;
+  line-height:1.01;
+  letter-spacing:-1.7px;
+}
+
+.primary,.secondary{
+  border:0;
+  border-radius:14px;
+  padding:13px 17px;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.primary{
+  background:var(--gold);
+  color:#101010;
+}
+
+.secondary{
+  background:#15364d;
+  color:#f3f8fb;
+  border:1px solid #2c5873;
+}
+
+.section-title{
+  font-size:31px;
+  margin:3px 0;
+  letter-spacing:-1px;
+}
+
+.section-subtitle{
+  margin:0 0 17px;
+  color:var(--muted);
+}
+
+.grid{
+  display:grid;
+  gap:14px;
+}
+
 .grid.two{grid-template-columns:1fr 1fr}
 .grid.three{grid-template-columns:repeat(3,1fr)}
 
-.metric{min-height:130px}
-.metric span{color:var(--muted);font-size:13px}
-.metric strong{display:block;font-size:34px;margin:8px 0 2px}
-.metric small{color:var(--muted)}
-
-.rings-wrap{display:flex;align-items:center;gap:20px}
-.rings{width:142px;height:142px;position:relative;flex:none}
-.ring{position:absolute;border-radius:50%;inset:0}
-.ring.outer{background:conic-gradient(var(--pink) var(--move,0%),#2c1520 0)}
-.ring.middle{inset:18px;background:conic-gradient(var(--lime) var(--exercise,0%),#233010 0)}
-.ring.inner{inset:36px;background:conic-gradient(var(--cyan) var(--focus,0%),#0f2b33 0)}
-.ring:after{
-  content:"";position:absolute;inset:10px;
-  border-radius:50%;background:#111113
+.metric{text-align:center}
+.metric span{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
 }
-.rings-center{
-  position:absolute;inset:52px;border-radius:50%;
-  background:#111113;display:grid;place-items:center;
-  font-weight:900;z-index:3
+.metric strong{
+  display:block;
+  font-size:34px;
+  margin:7px 0 2px;
 }
 
-.task-list{display:grid;gap:10px}
+.progress-arc{
+  width:150px;
+  height:150px;
+  flex:none;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(var(--gold) var(--progress,0%),#173344 0);
+  position:relative;
+}
+
+.progress-arc:after{
+  content:"";
+  position:absolute;
+  inset:13px;
+  border-radius:50%;
+  background:#0a2132;
+}
+
+.progress-arc span{
+  position:relative;
+  z-index:2;
+  font-size:27px;
+  font-weight:900;
+}
+
+.progress-wrap{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.task-list{
+  display:grid;
+  gap:10px;
+}
+
 .task{
-  display:flex;align-items:center;gap:12px;
-  padding:13px 14px;border-radius:16px;background:#202024
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#102c41;
+  border:1px solid #24485f;
+  border-radius:16px;
+  padding:13px;
 }
-.task input{width:22px;height:22px;accent-color:var(--lime)}
-.task span{font-weight:700}
+
+.task input{
+  width:22px;
+  height:22px;
+  accent-color:var(--gold);
+}
 
 .workout-card{
-  display:grid;grid-template-columns:58px 1fr auto;
-  gap:13px;align-items:center;
-  padding:15px;background:#1d1d20;
-  border-radius:18px;margin-bottom:10px
+  display:grid;
+  grid-template-columns:55px 1fr auto;
+  gap:13px;
+  align-items:center;
+  background:#102c41;
+  border:1px solid #24485f;
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:10px;
+  cursor:pointer;
 }
-.workout-icon{
-  width:54px;height:54px;border-radius:16px;
-  display:grid;place-items:center;font-size:25px;
-  background:linear-gradient(145deg,#34343a,#202024)
-}
-.workout-card h3{margin:0 0 4px;font-size:17px}
-.workout-card p{margin:0;color:var(--muted);font-size:13px}
-.arrow{color:#777780;font-size:22px}
 
-.section-title{
-  font-size:32px;margin:4px 0 4px;letter-spacing:-1px
+.workout-icon{
+  width:52px;
+  height:52px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#1c4c6c,#102b3f);
+  font-size:24px;
 }
-.section-subtitle{
-  margin:0 0 18px;color:var(--muted)
+
+.workout-card h3{
+  margin:0 0 4px;
+}
+
+.workout-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.arrow{
+  color:var(--gold);
+  font-size:24px;
+}
+
+.countdown{
+  font-size:43px;
+  font-weight:900;
+  letter-spacing:-2px;
+  margin:7px 0;
+  color:var(--gold);
+}
+
+.calendar-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.calendar-toolbar button{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  border:1px solid var(--line);
+  background:#123148;
+  color:white;
+  font-size:20px;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.day-name{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:5px 0;
+}
+
+.day{
+  aspect-ratio:1/1;
+  border-radius:13px;
+  background:#0c2639;
+  border:1px solid #1f4156;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:2px;
+  cursor:pointer;
+  position:relative;
+}
+
+.day.empty{
+  visibility:hidden;
+}
+
+.day.today{
+  border:2px solid var(--gold);
+}
+
+.day.future{
+  opacity:.5;
+}
+
+.day .number{
+  font-weight:850;
+}
+
+.day .mark{
+  font-size:12px;
+  min-height:14px;
+}
+
+.day.completed{
+  background:rgba(114,201,138,.22);
+  border-color:var(--green);
+}
+
+.day.partial{
+  background:rgba(217,173,74,.22);
+  border-color:var(--gold);
+}
+
+.day.recovery{
+  background:rgba(168,140,255,.2);
+  border-color:var(--purple);
+}
+
+.day.range{
+  background:rgba(69,184,255,.2);
+  border-color:var(--blue);
+}
+
+.day.missed{
+  background:rgba(255,107,107,.18);
+  border-color:var(--red);
+}
+
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.legend span{
+  padding:6px 9px;
+  border-radius:999px;
+  background:#102d42;
+  font-size:11px;
+  color:#dce9f1;
 }
 
 .event{
-  background:#1d1d20;border-radius:18px;
-  padding:16px;margin-bottom:11px;
-  border-left:5px solid var(--orange)
-}
-.event.primary-event{border-left-color:var(--lime)}
-.event.backup{border-left-color:var(--cyan)}
-.event-head{
-  display:flex;justify-content:space-between;gap:12px
-}
-.event h3{margin:0 0 5px}
-.status{color:var(--lime);font-size:12px;font-weight:900}
-.countdown{
-  font-size:42px;font-weight:900;
-  letter-spacing:-1px;margin:8px 0
+  background:#0c273a;
+  border:1px solid #24465a;
+  border-left:5px solid var(--gold);
+  border-radius:17px;
+  padding:15px;
+  margin-bottom:10px;
 }
 
-.badges{display:flex;flex-wrap:wrap;gap:8px}
+.event.backup{border-left-color:var(--blue)}
+
+.event-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.event h3{margin:0 0 4px}
+
+.status{
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+}
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
 .badges span{
-  padding:9px 12px;border-radius:999px;
-  background:#252529;color:#eee
+  background:#123149;
+  border:1px solid #2a5167;
+  border-radius:999px;
+  padding:8px 11px;
 }
 
 input,textarea{
-  width:100%;padding:13px;background:#1d1d20;
-  border:1px solid #34343a;color:#fff;
-  border-radius:14px;margin:6px 0 13px
-}
-textarea{min-height:110px;resize:vertical}
-.form-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px
+  width:100%;
+  padding:13px;
+  border-radius:14px;
+  border:1px solid #31546a;
+  background:#071d2d;
+  color:white;
+  margin:6px 0 13px;
 }
 
-table{width:100%;border-collapse:collapse}
-th,td{
-  padding:11px 7px;border-bottom:1px solid #303036;text-align:left
+textarea{
+  min-height:105px;
+  resize:vertical;
 }
-th{color:var(--cyan);font-size:12px}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  text-align:left;
+  padding:10px 7px;
+  border-bottom:1px solid #244357;
+}
+
+th{
+  color:var(--blue);
+  font-size:12px;
+}
+
+.share-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
 
 .bottom-nav{
-  position:fixed;left:0;right:0;bottom:0;z-index:20;
-  display:flex;justify-content:center;
-  background:rgba(0,0,0,.96);
-  border-top:1px solid #222226;
-  padding:8px 5px calc(8px + env(safe-area-inset-bottom));
-  backdrop-filter:blur(20px)
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:20;
+  display:flex;
+  justify-content:center;
+  background:rgba(4,15,24,.97);
+  border-top:1px solid #1b394b;
+  padding:7px 4px calc(7px + env(safe-area-inset-bottom));
+  backdrop-filter:blur(20px);
 }
-.bottom-nav button{
-  flex:1;max-width:145px;border:0;background:transparent;
-  color:#8d8d94;font-size:11px;padding:6px 2px
-}
-.bottom-nav button.active{color:#fff}
-.nav-icon{display:block;font-size:21px;margin-bottom:3px}
 
-.accent-pink{color:var(--pink)}
-.accent-lime{color:var(--lime)}
-.accent-cyan{color:var(--cyan)}
-.accent-orange{color:var(--orange)}
+.bottom-nav button{
+  flex:1;
+  max-width:145px;
+  background:transparent;
+  border:0;
+  color:#849aaa;
+  font-size:11px;
+  padding:6px 2px;
+}
+
+.bottom-nav button.active{
+  color:var(--gold);
+}
+
+.nav-icon{
+  display:block;
+  font-size:21px;
+  margin-bottom:2px;
+}
 
 @media(max-width:720px){
-  .grid.two,.grid.three,.form-grid{grid-template-columns:1fr}
+  .grid.two,.grid.three,.form-grid,.share-box{
+    grid-template-columns:1fr;
+  }
+
   .hero h2{font-size:35px}
   .hero{min-height:300px}
-  .rings-wrap{align-items:flex-start}
-  .brand h1{font-size:16px}
+  .progress-wrap{align-items:flex-start}
+  .progress-arc{width:128px;height:128px}
+  .progress-arc span{font-size:23px}
+  .day{border-radius:10px}
 }
 </style>
 </head>
@@ -253,26 +573,23 @@ th{color:var(--cyan);font-size:12px}
   </div>
 
   <div class="card">
-    <div class="rings-wrap">
-      <div class="rings">
-        <div class="ring outer"></div>
-        <div class="ring middle"></div>
-        <div class="ring inner"></div>
-        <div class="rings-center" id="ringPercent">0%</div>
+    <div class="progress-wrap">
+      <div class="progress-arc" id="progressArc">
+        <span id="progressPercent">0%</span>
       </div>
 
       <div>
-        <div class="eyebrow">DAILY PROGRESS</div>
-        <h2>Close Your Rings</h2>
+        <div class="eyebrow">BLUEPRINT PROGRESS</div>
+        <h2>Build the Day</h2>
         <p style="color:var(--muted)">
-          Mobility, conditioning, swing work, camera work and recovery.
+          Complete mobility, conditioning, swing work, camera work and recovery.
         </p>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="eyebrow">PRIMARY TARGET EVENT</div>
+    <div class="eyebrow">PRIMARY TARGET</div>
     <h2>Poppy Ridge Qualifier</h2>
     <p>Monday, October 19, 2026 · Livermore</p>
     <div class="countdown" id="countdown">—</div>
@@ -283,21 +600,21 @@ th{color:var(--cyan);font-size:12px}
 
   <div class="grid three">
     <div class="card metric">
-      <span>Current Week</span>
-      <strong class="accent-lime">1</strong>
-      <small>of 16</small>
+      <span>Current Streak</span>
+      <strong id="streakCount">0</strong>
+      <small>days</small>
+    </div>
+
+    <div class="card metric">
+      <span>Completed Days</span>
+      <strong id="completedDays">0</strong>
+      <small>total</small>
     </div>
 
     <div class="card metric">
       <span>Handicap</span>
-      <strong class="accent-cyan">3.5</strong>
+      <strong>3.5</strong>
       <small>current</small>
-    </div>
-
-    <div class="card metric">
-      <span>Range Day</span>
-      <strong class="accent-orange">Sat</strong>
-      <small>morning</small>
     </div>
   </div>
 
@@ -309,7 +626,7 @@ th{color:var(--cyan);font-size:12px}
   <p class="section-subtitle">Week 1 · Build Rotation</p>
 
   <div class="card">
-    <h3>Activity Rings</h3>
+    <h3>Today's Checklist</h3>
     <div id="taskList" class="task-list"></div>
   </div>
 
@@ -346,6 +663,65 @@ th{color:var(--cyan);font-size:12px}
       <p>Document today's progress</p>
     </div>
     <div class="arrow">›</div>
+  </div>
+
+  <button class="primary" style="width:100%;margin-top:10px" onclick="completeToday()">
+    Mark Today Complete
+  </button>
+
+</section>
+
+<section id="calendar" class="view">
+
+  <h2 class="section-title">Road Calendar</h2>
+  <p class="section-subtitle">Tap any day to change its status</p>
+
+  <div class="card">
+    <div class="calendar-toolbar">
+      <button onclick="changeMonth(-1)">‹</button>
+      <h3 id="calendarTitle"></h3>
+      <button onclick="changeMonth(1)">›</button>
+    </div>
+
+    <div class="calendar-grid">
+      <div class="day-name">S</div>
+      <div class="day-name">M</div>
+      <div class="day-name">T</div>
+      <div class="day-name">W</div>
+      <div class="day-name">T</div>
+      <div class="day-name">F</div>
+      <div class="day-name">S</div>
+    </div>
+
+    <div id="calendarGrid" class="calendar-grid"></div>
+
+    <div class="legend">
+      <span>✓ Completed</span>
+      <span>◐ Partial</span>
+      <span>♨ Recovery</span>
+      <span>⛳ Range</span>
+      <span>× Missed</span>
+    </div>
+  </div>
+
+  <div class="grid three">
+    <div class="card metric">
+      <span>Current Streak</span>
+      <strong id="calendarStreak">0</strong>
+      <small>days</small>
+    </div>
+
+    <div class="card metric">
+      <span>Completed Days</span>
+      <strong id="calendarCompleted">0</strong>
+      <small>total</small>
+    </div>
+
+    <div class="card metric">
+      <span>Days Remaining</span>
+      <strong id="daysRemaining">—</strong>
+      <small>to Poppy Ridge</small>
+    </div>
   </div>
 
 </section>
@@ -461,7 +837,7 @@ th{color:var(--cyan);font-size:12px}
   <div class="card">
     <h3>2026 Tournament Schedule</h3>
 
-    <div class="event primary-event">
+    <div class="event">
       <div class="event-head">
         <div>
           <h3>Poppy Ridge Golf Course</h3>
@@ -537,23 +913,6 @@ th{color:var(--cyan);font-size:12px}
     <button class="primary" onclick="saveResult()">Save Result</button>
   </div>
 
-  <div class="grid three">
-    <div class="card metric">
-      <span>Rounds</span>
-      <strong class="accent-pink" id="roundCount">0</strong>
-    </div>
-
-    <div class="card metric">
-      <span>Scoring Average</span>
-      <strong class="accent-lime" id="scoringAverage">—</strong>
-    </div>
-
-    <div class="card metric">
-      <span>Average Putts</span>
-      <strong class="accent-cyan" id="puttingAverage">—</strong>
-    </div>
-  </div>
-
   <div class="card">
     <h3>Results</h3>
     <div style="overflow:auto">
@@ -571,6 +930,38 @@ th{color:var(--cyan);font-size:12px}
         <tbody id="resultsTable"></tbody>
       </table>
     </div>
+  </div>
+
+</section>
+
+<section id="share" class="view">
+
+  <h2 class="section-title">Share</h2>
+  <p class="section-subtitle">Send progress to friends, family or groups</p>
+
+  <div class="card">
+    <div class="eyebrow">WEEKLY UPDATE</div>
+    <h2>Your Blueprint Progress</h2>
+    <p id="shareSummary"></p>
+
+    <div class="share-box">
+      <button class="primary" onclick="shareProgress()">Share Progress</button>
+      <button class="secondary" onclick="copyProgress()">Copy Summary</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>What Can Be Shared</h3>
+    <p>✓ Completed workouts</p>
+    <p>✓ Current streak</p>
+    <p>✓ Tournament countdown</p>
+    <p>✓ Tournament scores</p>
+    <p>✓ A personal message</p>
+  </div>
+
+  <div class="card">
+    <h3>Personal Message</h3>
+    <textarea id="shareMessage" placeholder="Add a note for your family or golf group..."></textarea>
   </div>
 
 </section>
@@ -603,16 +994,21 @@ th{color:var(--cyan);font-size:12px}
 </div>
 
 <nav class="bottom-nav">
+
   <button class="nav active" data-view="home">
-    <span class="nav-icon">⌂</span>Summary
+    <span class="nav-icon">⌂</span>Home
   </button>
 
   <button class="nav" data-view="today">
-    <span class="nav-icon">◉</span>Today
+    <span class="nav-icon">✓</span>Today
+  </button>
+
+  <button class="nav" data-view="calendar">
+    <span class="nav-icon">▦</span>Calendar
   </button>
 
   <button class="nav" data-view="fitness">
-    <span class="nav-icon">◎</span>Fitness
+    <span class="nav-icon">◆</span>Fitness
   </button>
 
   <button class="nav" data-view="swing">
@@ -623,9 +1019,14 @@ th{color:var(--cyan);font-size:12px}
     <span class="nav-icon">🏆</span>Events
   </button>
 
+  <button class="nav" data-view="share">
+    <span class="nav-icon">↗</span>Share
+  </button>
+
   <button class="nav" data-view="journal">
     <span class="nav-icon">✎</span>Journey
   </button>
+
 </nav>
 
 <script>
@@ -637,12 +1038,36 @@ const taskNames=[
   "Recovery"
 ];
 
+const statusCycle=[
+  "",
+  "completed",
+  "partial",
+  "recovery",
+  "range",
+  "missed"
+];
+
+const statusMarks={
+  "":"",
+  "completed":"✓",
+  "partial":"◐",
+  "recovery":"♨",
+  "range":"⛳",
+  "missed":"×"
+};
+
+let calendarDate=new Date();
+
 function getData(){
-  return JSON.parse(localStorage.getItem("blueprintAppleData")||"{}");
+  return JSON.parse(localStorage.getItem("blueprintV3Data")||"{}");
 }
 
 function saveData(data){
-  localStorage.setItem("blueprintAppleData",JSON.stringify(data));
+  localStorage.setItem("blueprintV3Data",JSON.stringify(data));
+}
+
+function dateKey(date){
+  return date.toISOString().slice(0,10);
 }
 
 function openView(id){
@@ -653,6 +1078,14 @@ function openView(id){
   document.querySelectorAll(".nav").forEach(button=>{
     button.classList.toggle("active",button.dataset.view===id);
   });
+
+  if(id==="calendar"){
+    renderCalendar();
+  }
+
+  if(id==="share"){
+    updateShareSummary();
+  }
 
   window.scrollTo(0,0);
 }
@@ -692,22 +1125,30 @@ function syncTasks(){
   const completed=taskNames.filter(name=>data[name]).length;
   const percent=Math.round(completed/taskNames.length*100);
 
-  document.getElementById("ringPercent").textContent=percent+"%";
+  document.getElementById("progressPercent").textContent=percent+"%";
+  document.getElementById("progressArc").style.setProperty("--progress",percent+"%");
 
-  document.documentElement.style.setProperty(
-    "--move",
-    Math.min(percent*1.1,100)+"%"
-  );
+  updateStats();
+}
 
-  document.documentElement.style.setProperty(
-    "--exercise",
-    Math.min(percent*.9,100)+"%"
-  );
+function completeToday(){
+  const data=getData();
 
-  document.documentElement.style.setProperty(
-    "--focus",
-    percent+"%"
-  );
+  taskNames.forEach(name=>{
+    data[name]=true;
+  });
+
+  if(!data.calendar){
+    data.calendar={};
+  }
+
+  data.calendar[dateKey(new Date())]="completed";
+
+  saveData(data);
+  syncTasks();
+  renderCalendar();
+
+  alert("Today marked complete.");
 }
 
 function updateCountdown(){
@@ -721,11 +1162,127 @@ function updateCountdown(){
   );
 
   document.getElementById("countdown").textContent=
-    days>0
-    ? days+" days"
-    : days===0
-    ? "Qualifier Day"
-    : "Completed";
+    days>0 ? days+" days" :
+    days===0 ? "Qualifier Day" :
+    "Completed";
+
+  document.getElementById("daysRemaining").textContent=
+    Math.max(days,0);
+}
+
+function changeMonth(amount){
+  calendarDate.setMonth(calendarDate.getMonth()+amount);
+  renderCalendar();
+}
+
+function renderCalendar(){
+  const data=getData();
+  const calendar=data.calendar||{};
+  const year=calendarDate.getFullYear();
+  const month=calendarDate.getMonth();
+
+  document.getElementById("calendarTitle").textContent=
+    calendarDate.toLocaleDateString(undefined,{
+      month:"long",
+      year:"numeric"
+    });
+
+  const grid=document.getElementById("calendarGrid");
+  grid.innerHTML="";
+
+  const firstDay=new Date(year,month,1).getDay();
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const todayKey=dateKey(new Date());
+
+  for(let i=0;i<firstDay;i++){
+    const empty=document.createElement("div");
+    empty.className="day empty";
+    grid.appendChild(empty);
+  }
+
+  for(let day=1;day<=daysInMonth;day++){
+    const current=new Date(year,month,day,12);
+    const key=dateKey(current);
+    const status=calendar[key]||"";
+
+    const cell=document.createElement("div");
+    cell.className="day "+status;
+
+    if(key===todayKey){
+      cell.classList.add("today");
+    }
+
+    cell.innerHTML=
+      `<div class="number">${day}</div>
+       <div class="mark">${statusMarks[status]}</div>`;
+
+    cell.onclick=()=>{
+      const latest=getData();
+
+      if(!latest.calendar){
+        latest.calendar={};
+      }
+
+      const currentStatus=latest.calendar[key]||"";
+      const nextIndex=
+        (statusCycle.indexOf(currentStatus)+1)%statusCycle.length;
+
+      const nextStatus=statusCycle[nextIndex];
+
+      if(nextStatus){
+        latest.calendar[key]=nextStatus;
+      }else{
+        delete latest.calendar[key];
+      }
+
+      saveData(latest);
+      renderCalendar();
+      updateStats();
+    };
+
+    grid.appendChild(cell);
+  }
+}
+
+function completedDateKeys(){
+  const data=getData();
+  const calendar=data.calendar||{};
+
+  return Object.keys(calendar)
+    .filter(key=>calendar[key]==="completed")
+    .sort();
+}
+
+function calculateStreak(){
+  const data=getData();
+  const calendar=data.calendar||{};
+  let streak=0;
+  const cursor=new Date();
+
+  cursor.setHours(12,0,0,0);
+
+  for(let i=0;i<500;i++){
+    const key=dateKey(cursor);
+
+    if(calendar[key]==="completed"){
+      streak++;
+      cursor.setDate(cursor.getDate()-1);
+    }else{
+      break;
+    }
+  }
+
+  return streak;
+}
+
+function updateStats(){
+  const completed=completedDateKeys().length;
+  const streak=calculateStreak();
+
+  document.getElementById("streakCount").textContent=streak;
+  document.getElementById("completedDays").textContent=completed;
+  document.getElementById("calendarStreak").textContent=streak;
+  document.getElementById("calendarCompleted").textContent=completed;
 }
 
 function saveResult(){
@@ -777,11 +1334,9 @@ function renderResults(){
     const toPar=result.score-result.par;
 
     const display=
-      toPar===0
-      ? "E"
-      : toPar>0
-      ? "+"+toPar
-      : toPar;
+      toPar===0 ? "E" :
+      toPar>0 ? "+"+toPar :
+      toPar;
 
     return `
       <tr>
@@ -794,22 +1349,57 @@ function renderResults(){
       </tr>
     `;
   }).join("");
+}
 
-  document.getElementById("roundCount").textContent=results.length;
+function updateShareSummary(){
+  const data=getData();
+  const completed=completedDateKeys().length;
+  const streak=calculateStreak();
+  const results=data.results||[];
 
-  if(results.length){
-    const scoring=
-      results.reduce((sum,result)=>sum+result.score,0)/results.length;
+  const summary=
+    `Blueprint Golf Performance System\n`+
+    `Road to the California Senior Amateur\n\n`+
+    `Current streak: ${streak} days\n`+
+    `Completed training days: ${completed}\n`+
+    `Tournament rounds logged: ${results.length}\n`+
+    `Primary qualifier: Poppy Ridge — October 19, 2026`;
 
-    const putting=
-      results.reduce((sum,result)=>sum+result.putts,0)/results.length;
+  document.getElementById("shareSummary").textContent=summary;
+}
 
-    document.getElementById("scoringAverage").textContent=scoring.toFixed(1);
-    document.getElementById("puttingAverage").textContent=putting.toFixed(1);
-  }else{
-    document.getElementById("scoringAverage").textContent="—";
-    document.getElementById("puttingAverage").textContent="—";
+function buildShareText(){
+  updateShareSummary();
+
+  let text=document.getElementById("shareSummary").textContent;
+  const message=document.getElementById("shareMessage").value.trim();
+
+  if(message){
+    text+="\n\n"+message;
   }
+
+  return text;
+}
+
+async function shareProgress(){
+  const text=buildShareText();
+
+  if(navigator.share){
+    try{
+      await navigator.share({
+        title:"Blueprint Golf Progress",
+        text
+      });
+    }catch(error){}
+  }else{
+    await navigator.clipboard.writeText(text);
+    alert("Progress copied. Paste it into your group message.");
+  }
+}
+
+async function copyProgress(){
+  await navigator.clipboard.writeText(buildShareText());
+  alert("Progress summary copied.");
 }
 
 function saveJournal(){
@@ -838,8 +1428,10 @@ function loadJournal(){
 
 syncTasks();
 updateCountdown();
+renderCalendar();
 renderResults();
 loadJournal();
+updateStats();
 </script>
 
 </body>
